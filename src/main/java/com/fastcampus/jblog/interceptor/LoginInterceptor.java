@@ -9,7 +9,7 @@ import java.util.List;
 
 public class LoginInterceptor implements HandlerInterceptor {
 
-    private final List<String> excludePath = List.of("/", "/loginView", "/login", "/searchBlog", "/css/**", "/images/**");
+    private final List<String> excludePath = List.of("/", "/login/**", "/css/**", "/images/**");
 
     public List<String> getExcludePath() {
         return excludePath;
@@ -19,7 +19,7 @@ public class LoginInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         UserVO user = (UserVO)request.getSession().getAttribute("user");
         if(user == null) {
-            response.sendRedirect("/loginView");
+            response.sendRedirect("/login/view");
         }
         return user != null;
     }

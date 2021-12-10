@@ -21,12 +21,12 @@ public class MainController {
     public String index(HttpSession session, Model model) {
         if(session.getAttribute("user") != null) {
             BlogVO userBlog = blogService.getUserBlog((UserVO)session.getAttribute("user"));
-            session.setAttribute("userBlog", userBlog);
+            model.addAttribute("userBlog", userBlog);
         }
 
         List<BlogVO> blogs = blogService.getBlogs();
         model.addAttribute("blogs", blogs);
 
-        return "forward:/index.jsp";
+        return "index";
     }
 }

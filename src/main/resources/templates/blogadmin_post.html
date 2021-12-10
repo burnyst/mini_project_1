@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<link th:href="@{/css/theme.css}" rel="stylesheet" type="text/css">
+	<link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+	<title>JBlog</title>
+</head>
+<body>
+<div class="head_box">
+	<div class="text_box">
+		<h1 th:text="${ blog.title }"></h1>
+		<p th:text="${ blog.tag }"></p>
+		<div class="link_box">
+			<span><a th:href="@{/logout}">로그아웃</a></span>
+			<span><a th:href="@{/blog/main(blogId=${ blog.blogId })}">내 블로그 메인</a></span>
+		</div>
+	</div>
+</div>
+	<br>
+	<div class="content_box">
+		<div class="setting_menu_box">
+			<a th:href="@{/blog/admin(blogId=${ blog.blogId })}">기본설정</a>&nbsp;
+			<a th:href="@{/blog/admin/category(blogId=${ blog.blogId })}">카테고리</a>&nbsp;
+			<a th:href="@{/blog/admin/post(blogId=${ blog.blogId })}">글작성</a>
+			<a th:href="@{/blogDeleteRequest(blogId=${ blog.blogId })}">삭제요청</a>
+		</div>
+		<br>
+		<th:block th:if="${ updatePost == null }">
+			<form action="/insert/post" method="post">
+			<input id="blogId" name="blogId" th:value="${ blog.blogId }" type="hidden" />
+			<table>
+				<tr>
+					<th>제목 : </th>
+					<td>
+						<input id="title_input" type="text" name="title">
+						<select name="categoryId">
+							<th:block th:each="category : ${ categorys }">
+								<option th:value="${ category.categoryId }" th:text="${ category.categoryName }"></option>
+							</th:block>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<th>내용 : </th>
+					<td>
+						<textarea id="content" name="content" rows="10" cols="100"></textarea>
+					</td>
+				</tr>
+			</table>
+			<br>
+			<div class="submit_btn">
+				<input id="submit_btn" type="submit" value="확인" />
+			</div>
+			</form>
+		</th:block>
+		<th:block th:if="${ updatePost != null }">
+			<form action="/update/post" method="post">
+				<input id="blogId" name="blogId" th:value="${ blog.blogId }" type="hidden" />
+				<input id="postId" name="postId" th:value="${ updatePost.postId }" type="hidden" />
+				<table>
+					<tr>
+						<th>제목 : </th>
+						<td>
+							<input id="title_input" type="text" name="title" th:value="${ updatePost.title }">
+							<select name="categoryId">
+								<th:block th:each="category : ${ categorys }">
+									<option th:value="${ category.categoryId }" th:text="${ category.categoryName }" th:selected="${ updatePost.category.categoryId == category.categoryId }"></option>
+								</th:block>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<th>내용 : </th>
+						<td>
+							<textarea id="content" name="content" rows="10" cols="100" th:text="${ updatePost.content }"></textarea>
+						</td>
+					</tr>
+				</table>
+				<br>
+				<div class="submit_btn">
+					<input id="submit_btn" type="submit" value="수정" />
+				</div>
+			</form>
+		</th:block>
+	</div>
+	<div class="footer">
+		<br><br>
+		<p>Spring Stories is powered by JBlog</p>
+	</div>
+</body>
+</html>

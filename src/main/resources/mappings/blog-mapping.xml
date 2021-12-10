@@ -69,7 +69,7 @@
         VALUES (#{ user.userId }, #{ title }, #{ tag }, #{ cntDisplayPost }, #{ status })
     </insert>
 
-    <update id="updateBlog">
+    <update id="update/blog">
         UPDATE BLOG
         SET TITLE = #{ title }, TAG = #{ tag }
         WHERE BLOG_ID = #{ blogId }

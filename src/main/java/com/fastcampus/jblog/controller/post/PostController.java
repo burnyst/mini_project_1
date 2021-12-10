@@ -28,9 +28,10 @@ public class PostController {
     @Autowired
     private BlogService blogService;
 
-    @RequestMapping("/blogAdminPost")
-    public String blogAdminPost(BlogVO blog, Model model) {
-        BlogVO findBlog = blogService.getUserBlog(blogService.getBlog(blog).getUser());
+    @RequestMapping("/blog/admin/post")
+    public String blogAdminPost(HttpSession session, Model model) {
+        UserVO blogUser = (UserVO)session.getAttribute("user");
+        BlogVO findBlog = blogService.getUserBlog(blogUser);
         List<CategoryVO> categorys = categoryService.getCategorys(findBlog);
 
         model.addAttribute("blog", findBlog);
@@ -39,19 +40,17 @@ public class PostController {
         return "blogadmin_post";
     }
 
-    @RequestMapping("/insertPost")
-    public String insertPost(BlogVO blog, CategoryVO category, PostVO post, Model model) {
+    @RequestMapping("/insert/post")
+    public String insertPost(BlogVO blog, CategoryVO category, PostVO post) {
         blog.setUser(blogService.getBlog(blog).getUser());
         category.setBlog(blog);
         post.setCategory(category);
         postService.insertPost(post);
 
-        model.addAttribute("blogId", blog.getBlogId());
-
-        return "forward:blogMain";
+        return "redirect:/blog/main";
     }
 
-    @RequestMapping("/updatePostView")
+    @RequestMapping("/update/post/view")
     public String updatePostView(BlogVO blog, PostVO post, Model model) {
         PostVO updatePost = postService.getPost(post);
         BlogVO findBlog = blogService.getUserBlog(blogService.getBlog(blog).getUser());
@@ -64,39 +63,20 @@ public class PostController {
         return "blogadmin_post";
     }
 
-    @RequestMapping("/updatePost")
-    public String updatePost(BlogVO blog, CategoryVO category, PostVO post, Model model) {
+    @RequestMapping("/update/post")
+    public String updatePost(BlogVO blog, CategoryVO category, PostVO post) {
         blog.setUser(blogService.getBlog(blog).getUser());
         category.setBlog(blog);
         post.setCategory(category);
         postService.updatePost(post);
 
-        model.addAttribute("blogId", blog.getBlogId());
-
-        return "forward:blogMain";
+        return "redirect:/blog/main";
     }
 
-    @RequestMapping("/deletePost")
-    public String deletePost(BlogVO blog, CategoryVO category, PostVO post, Model model) {
+    @RequestMapping("/delete/post")
+    public String deletePost(PostVO post) {
         postService.deletePost(post);
 
-        BlogVO findBlog = blogService.getBlog(blog);
-        findBlog.setUser(blogService.getBlog(blog).getUser());
-        List<CategoryVO> categorys = categoryService.getCategorys(findBlog);
-
-        model.addAttribute("blogId", findBlog.getBlogId());
-        List<PostVO> posts;
-        if(category != null && category.getCategoryId() > 0) {
-            model.addAttribute("categoryId", category.getCategoryId());
-            posts = postService.searchPostByCategory(findBlog, category);
-        } else {
-            posts = postService.getPosts(findBlog);
-        }
-
-        model.addAttribute("posts", posts);
-        model.addAttribute("blog", findBlog);
-        model.addAttribute("categorys", categorys);
-
-        return "blogmain";
+        return "redirect:/blog/main";
     }
 }

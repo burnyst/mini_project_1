@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/css/theme.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+    <title>JBlog</title>
+</head>
+<body>
+<div class="blog_logo">
+    <a href="/">
+        <img th:src="@{/images/logo.jpg}">
+    </a>
+</div>
+<br><br><br>
+<div class="menu_item">
+    <th:block th:if="${ #strings.isEmpty(session.user) }">
+        <span><a href="/login/view">로그인</a></span>
+    </th:block>
+    <th:block th:if="${ not #strings.isEmpty(session.user) }">
+        <span th:if="${ #strings.isEmpty(userBlog) }"><a th:href="@{/create/blog/view}">블로그등록</a></span>
+        <span th:if="${ not #strings.isEmpty(userBlog) }"><a th:href="@{/blog/main(blogId=${ userBlog.blogId })}">내 블로그로 가기</a></span>
+    </th:block>
+</div>
+<br>
+<div class="search_box">
+    <form action="/search/blog" method="get">
+        <input id="search_value" name="searchValue" type="search"/>
+        <input id="search_btn" type="submit" value="검색"/>
+        <div class="blank_box_1"></div>
+        <input type="radio" id="blog_title" name="searchType" value="title" checked="checked">
+        <label for="blog_title">블로그 제목</label>
+        <input type="radio" id="blog_tag" name="searchType" value="tag">
+        <label for="blog_tag">태그</label>
+        <input type="radio" id="blog_bloger" name="searchType" value="blogger">
+        <label for="blog_bloger">블로거</label>
+    </form>
+</div>
+<br>
+<div class="blog_list" th:if="${ not #strings.isEmpty(blogs) }">
+    <table>
+        <tr>
+            <th>블로그 제목</th>
+            <th>블로거</th>
+            <th>로고</th>
+            <th>상태</th>
+            <th>삭제</th>
+        </tr>
+        <tr th:each="blog : ${ blogs }">
+            <td><a th:href="@{/blog/main(blogId=${ blog.blogId })}"><span th:text="${ blog.title }" ></span></a></td>
+            <td th:text="${ blog.user.userName }"></td>
+            <td><img id="table_logo_img" th:src="@{/images/j2eelogo.jpg}" alt="로고"/></td>
+            <td th:text="${ blog.status }"></td>
+            <td>
+                <th:block th:if="${ not #strings.isEmpty(session.user) }">
+                    <a th:if="${ session.user.role eq 'ADMIN' }" th:href="@{/delete/blog(blogId=${ blog.blogId })}"><img id="table_delete_img" th:src="@{/images/delete.jpg}" alt="삭제" /></a>
+                </th:block>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

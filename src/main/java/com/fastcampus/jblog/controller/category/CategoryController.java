@@ -22,9 +22,10 @@ public class CategoryController {
     @Autowired
     private BlogService blogService;
 
-    @RequestMapping("/blogAdminCategory")
-    public String blogAdminCategory(BlogVO blog, Model model) {
-        BlogVO findBlog = blogService.getUserBlog(blogService.getBlog(blog).getUser());
+    @RequestMapping("/blog/admin/category")
+    public String blogAdminCategory(HttpSession session, Model model) {
+        UserVO blogUser = (UserVO)session.getAttribute("user");
+        BlogVO findBlog = blogService.getUserBlog(blogUser);
         List<CategoryVO> categorys = categoryService.getCategorys(findBlog);
 
         model.addAttribute("blog", findBlog);
@@ -33,34 +34,24 @@ public class CategoryController {
         return "blogadmin_category";
     }
 
-    @RequestMapping("/insertCategory")
-    public String insertCategory(BlogVO blog, CategoryVO category, Model model) {
+    @RequestMapping("/insert/category")
+    public String insertCategory(BlogVO blog, CategoryVO category) {
         BlogVO findBlog = blogService.getUserBlog(blogService.getBlog(blog).getUser());
         categoryService.insertCategory(category, findBlog);
-        List<CategoryVO> categorys = categoryService.getCategorys(findBlog);
-
-        model.addAttribute("blog", findBlog);
-        model.addAttribute("categorys", categorys);
-
-        return "blogadmin_category";
+  
+        return "redirect:/blog/admin/category";
     }
 
-    @RequestMapping("/deleteCategory")
-    public String deleteCategory(BlogVO blog, CategoryVO category, Model model, HttpSession session) {
+    @RequestMapping("/delete/category")
+    public String deleteCategory(BlogVO blog, CategoryVO category) {
         BlogVO findBlog = blogService.getUserBlog(blogService.getBlog(blog).getUser());
-
         category.setBlog(findBlog);
         categoryService.deleteCategory(category);
 
-        List<CategoryVO> categorys = categoryService.getCategorys(findBlog);
-
-        model.addAttribute("blog", findBlog);
-        model.addAttribute("categorys", categorys);
-
-        return "blogadmin_category";
+        return "redirect:/blog/admin/category";
     }
 
-    @RequestMapping("/updateCategoryView")
+    @RequestMapping("/update/category/view")
     public String updateCategoryView(BlogVO blog, CategoryVO category, Model model) {
         BlogVO findBlog = blogService.getUserBlog(blogService.getBlog(blog).getUser());
         List<CategoryVO> categorys = categoryService.getCategorys(findBlog);
@@ -73,19 +64,13 @@ public class CategoryController {
         return "blogadmin_category";
     }
 
-    @RequestMapping("/updateCategory")
-    public String updateCategory(BlogVO blog, CategoryVO category, Model model) {
+    @RequestMapping("/update/category")
+    public String updateCategory(BlogVO blog, CategoryVO category) {
         BlogVO findBlog = blogService.getUserBlog(blogService.getBlog(blog).getUser());
-
         category.setBlog(findBlog);
         categoryService.updateCategory(category);
 
-        List<CategoryVO> categorys = categoryService.getCategorys(findBlog);
-
-        model.addAttribute("blog", findBlog);
-        model.addAttribute("categorys", categorys);
-
-        return "blogadmin_category";
+        return "redirect:/blog/admin/category";
     }
 
 }

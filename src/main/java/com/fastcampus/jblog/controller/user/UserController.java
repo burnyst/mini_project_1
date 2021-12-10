@@ -23,7 +23,7 @@ public class UserController {
 	@Autowired
 	private BlogService blogService;
 	
-	@RequestMapping("/loginView")
+	@RequestMapping("/login/view")
 	public String loginView() {
 		return "bloglogin";
 	}
@@ -34,7 +34,7 @@ public class UserController {
 		if(!UserVO.isEmpty(findUser)) {
 			// 로그인 성공한 경우 세션에 사용자 정보를 저장한다.
 			session.setAttribute("user", findUser);
-			
+
 			// 로그인 성공한 사용자가 블로그를 소유한 사용자인지 조회하여 Model에 등록한다.
 			BlogVO userBlog = blogService.getUserBlog(findUser);
 			model.addAttribute("userBlog", userBlog);
@@ -43,7 +43,7 @@ public class UserController {
 			List<BlogVO> blogs = blogService.getBlogs();
 			model.addAttribute("blogs", blogs);
 		}
-		return "forward:/";
+		return "index";
 	}
 
 	@RequestMapping("/logout")

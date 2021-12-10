@@ -1,20 +1,20 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="css/theme.css">
-<link rel="stylesheet" href="css/style.css">
+	<link th:href="@{/css/theme.css}" rel="stylesheet" type="text/css">
+	<link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
 <title>JBlog</title>
 </head>
 <body>
 	<div class="blog_logo">
-		<img src="images/logo.jpg">
+		<a href="/">
+			<img th:src="@{/images/logo.jpg}">
+		</a>
 	</div>
 	<br><br><br>
 	<div class="login_box">
-		<form action="login" method="post">
+		<form action="/login" method="post">
 		  아이디 : <input type="text" id="id_input" name="id" />&nbsp;
 		  패스워드 : <input type="password" id="pw_input" name="password" /><br><br>
 		  <input id="login_btn" type="submit" value="로그인" />

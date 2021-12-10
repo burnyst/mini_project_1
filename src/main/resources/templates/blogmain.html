@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/css/theme.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+    <title>JBlog</title>
+</head>
+<body>
+<div class="head_box">
+    <div class="text_box">
+        <h1 th:text="${ blog.title }"></h1>
+        <p th:text="${ blog.tag }"></p>
+    </div>
+</div>
+<div class="content_box">
+    <div class="post_box">
+        <div th:if="${ #strings.isEmpty(posts) }" class="post">
+            <h2></h2>
+            <p></p>
+            <p></p>
+            <p></p>
+        </div>
+        <th:block th:if="${ not #lists.isEmpty(posts) }">
+            <div class="post" th:each="post : ${ posts }">
+                <h2>
+                    <span th:text="${ post.title }"></span>
+                    <a th:if="${ session.user.userId == blog.user.userId }" th:href="@{/update/post/view(postId=${ post.postId }, blogId=${ blog.blogId })}">EDIT</a>
+                    <a th:if="${ session.user.userId == blog.user.userId and not #strings.isEmpty(categoryId) }" th:href="@{/delete/post(postId=${ post.postId }, blogId=${ blog.blogId }, categoryId=${ categoryId })}">DEL</a>
+                    <a th:if="${ session.user.userId == blog.user.userId }" th:href="@{/delete/post(postId=${ post.postId }, blogId=${ blog.blogId })}">DEL</a>
+                </h2>
+                <p th:text="${ #dates.format(post.createdDate, 'dd/MMM/yyyy HH:mm') }"></p>
+                <p th:if="${ post.category.displayType == 'all' }" th:text="${ post.content }"></p>
+                <p th:text="${ blogUser.userName }" class="post_by_user"></p>
+            </div>
+        </th:block>
+    </div>
+    <br>
+    <br>
+    <div class="menu_item">
+        <th:block th:if="${ session.user.userId != blog.user.userId }">
+            <span><a href="/login/view">로그인</a></span>
+        </th:block>
+        <th:block th:if="${ session.user.userId == blog.user.userId }">
+            <span><a href="/logout">로그아웃</a></span>
+            <span><a th:href="@{/blog/admin(blogId=${ blog.blogId })}">블로그관리</a></span>
+        </th:block>
+    </div>
+    <br>
+    <div class="category_box">
+        <img id="table_logo_img" th:src="@{/images/j2eelogo.jpg}" alt="로고"/>
+        <ul>
+            <li class="categorytitle">카테고리</li>
+            <th:block th:each="category : ${ categorys }">
+                <a th:href="@{/search/post(categoryId=${ category.categoryId }, blogId=${ blog.blogId })}">
+                    <li th:text="${ category.categoryName }" class="categoryitem"></li>
+                </a>
+            </th:block>
+        </ul>
+        <img th:src="@{/images/logo.jpg}">
+    </div>
+</div>
+</div>
+<div class="footer">
+    <br><br>
+    <p>Spring Stories is powered by JBlog</p>
+</div>
+</body>
+</html>
