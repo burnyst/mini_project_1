@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,13 +16,11 @@ import com.fastcampus.jblog.biz.user.UserService;
 import com.fastcampus.jblog.biz.user.UserVO;
 
 @Controller
+@RequiredArgsConstructor
 public class UserController {
-	
-	@Autowired
-	private UserService userSerivce;
-	
-	@Autowired
-	private BlogService blogService;
+
+	private final UserService userSerivce;
+	private final BlogService blogService;
 	
 	@RequestMapping("/login/view")
 	public String loginView() {

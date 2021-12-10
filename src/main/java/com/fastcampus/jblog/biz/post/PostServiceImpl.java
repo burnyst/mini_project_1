@@ -4,16 +4,17 @@ import com.fastcampus.jblog.biz.blog.BlogDAO;
 import com.fastcampus.jblog.biz.blog.BlogVO;
 import com.fastcampus.jblog.biz.category.CategoryDAO;
 import com.fastcampus.jblog.biz.category.CategoryVO;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class PostServiceImpl implements PostService {
 
-    @Autowired
-    private PostDAO postDAO;
+    private final PostDAO postDAO;
 
     @Override
     public PostVO getPost(PostVO post) {

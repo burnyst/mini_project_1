@@ -7,6 +7,7 @@ import com.fastcampus.jblog.biz.category.CategoryVO;
 import com.fastcampus.jblog.biz.post.PostService;
 import com.fastcampus.jblog.biz.post.PostVO;
 import com.fastcampus.jblog.biz.user.UserVO;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,16 +18,12 @@ import java.util.List;
 import java.util.Objects;
 
 @Controller
+@RequiredArgsConstructor
 public class PostController {
 
-    @Autowired
-    private PostService postService;
-
-    @Autowired
-    private CategoryService categoryService;
-
-    @Autowired
-    private BlogService blogService;
+    private final PostService postService;
+    private final CategoryService categoryService;
+    private final BlogService blogService;
 
     @RequestMapping("/blog/admin/post")
     public String blogAdminPost(HttpSession session, Model model) {

@@ -4,19 +4,18 @@ import java.util.List;
 
 import com.fastcampus.jblog.biz.category.CategoryDAO;
 import com.fastcampus.jblog.biz.category.CategoryVO;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.fastcampus.jblog.biz.user.UserVO;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class BlogServiceImpl implements BlogService {
 
-	@Autowired
-	private BlogDAO blogDAO;
-
-	@Autowired
-	private CategoryDAO categoryDAO;
+	private final BlogDAO blogDAO;
+	private final CategoryDAO categoryDAO;
 
 	@Override
 	public BlogVO getUserBlog(UserVO user) { return blogDAO.getUserBlog(user); }

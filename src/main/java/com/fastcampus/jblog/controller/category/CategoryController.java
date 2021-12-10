@@ -5,6 +5,7 @@ import com.fastcampus.jblog.biz.blog.BlogVO;
 import com.fastcampus.jblog.biz.category.CategoryService;
 import com.fastcampus.jblog.biz.category.CategoryVO;
 import com.fastcampus.jblog.biz.user.UserVO;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,13 +15,11 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 public class CategoryController {
 
-    @Autowired
-    private CategoryService categoryService;
-
-    @Autowired
-    private BlogService blogService;
+    private final CategoryService categoryService;
+    private final BlogService blogService;
 
     @RequestMapping("/blog/admin/category")
     public String blogAdminCategory(HttpSession session, Model model) {
