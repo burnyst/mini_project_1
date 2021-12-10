@@ -1,7 +1,5 @@
 package com.fastcampus.jblog.config;
 
-import com.fastcampus.jblog.aop.ControllerAdvice;
-import com.fastcampus.jblog.aop.ServiceAdvice;
 import com.fastcampus.jblog.biz.blog.BlogDAO;
 import com.fastcampus.jblog.biz.blog.BlogDAOJdbc;
 import com.fastcampus.jblog.biz.blog.BlogDAOJpa;
@@ -23,24 +21,6 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class AppConfig {
-
-    /* AOP Bean */
-    @Bean
-    public ControllerAdvice controllerAdvice() {
-        return new ControllerAdvice();
-    }
-
-    @Bean
-    public ServiceAdvice serviceAdvice() {
-        return new ServiceAdvice();
-    }
-
-//    @Bean
-//    public DaoAdvice daoAdvice() {
-//        return new DaoAdvice();
-//    }
-
-    /* DAO Bean */
 
     @Bean
     public UserDAO userDAO() {
