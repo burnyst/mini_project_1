@@ -48,13 +48,13 @@ public class BlogAdvice {
     public void beforeDaoLog(JoinPoint jp) {
         String method = jp.getSignature().getName();
         Object[] args = jp.getArgs();
-        LOGGER.debug("[ 레파지토리 ] " + method + "() 매개변수 : " + Arrays.toString(args));
+        LOGGER.debug("[ DAO ] " + method + "() 매개변수 : " + Arrays.toString(args));
     }
 
     @AfterReturning(pointcut = "BlogPointcut.daoPointcut()", returning = "returnObj")
     public void afterDaoLog(JoinPoint jp, Object returnObj) {
         String method = jp.getSignature().getName();
         if(returnObj != null)
-            LOGGER.debug("[ 레파지토리 ] " + method + "() 리턴값 : " + returnObj);
+            LOGGER.debug("[ DAO ] " + method + "() 리턴값 : " + returnObj);
     }
 }
