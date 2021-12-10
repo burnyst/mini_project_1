@@ -28,5 +28,6 @@ public class Post {
 
     private String content;
 
+    @Column(insertable = false, updatable = false, columnDefinition = "date default sysdate")
     private Date createdDate;
 }
