@@ -3,7 +3,6 @@ package com.fastcampus.jblog.biz.post;
 import com.fastcampus.jblog.biz.blog.BlogVO;
 import com.fastcampus.jblog.biz.category.CategoryVO;
 import com.fastcampus.jblog.common.JDBCUtil;
-import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

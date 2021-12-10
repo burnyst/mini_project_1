@@ -1,10 +1,7 @@
 package com.fastcampus.jblog.biz.blog;
 
-import com.fastcampus.jblog.biz.user.User;
-import com.fastcampus.jblog.biz.user.UserVO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

@@ -1,7 +1,6 @@
 package com.fastcampus.jblog.biz.post;
 
 import com.fastcampus.jblog.biz.category.Category;
-import com.fastcampus.jblog.biz.category.CategoryVO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

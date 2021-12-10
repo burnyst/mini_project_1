@@ -8,7 +8,6 @@ import java.util.List;
 
 import com.fastcampus.jblog.common.JDBCUtil;
 import com.fastcampus.jblog.biz.user.UserVO;
-import org.springframework.stereotype.Repository;
 
 public class BlogDAOJdbc implements BlogDAO {
 	private Connection conn;

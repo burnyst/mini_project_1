@@ -1,6 +1,5 @@
 package com.fastcampus.jblog.biz.blog;
 
-import com.fastcampus.jblog.biz.category.Category;
 import com.fastcampus.jblog.biz.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,8 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Data
 @NoArgsConstructor

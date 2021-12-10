@@ -2,7 +2,6 @@ package com.fastcampus.jblog.biz.category;
 
 import com.fastcampus.jblog.biz.blog.BlogVO;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -1,6 +1,5 @@
 package com.fastcampus.jblog.biz.blog;
 
-import com.fastcampus.jblog.biz.user.UserRepository;
 import com.fastcampus.jblog.biz.user.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 

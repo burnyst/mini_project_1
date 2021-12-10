@@ -8,14 +8,12 @@ import com.fastcampus.jblog.biz.post.PostService;
 import com.fastcampus.jblog.biz.post.PostVO;
 import com.fastcampus.jblog.biz.user.UserVO;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
-import java.util.Objects;
 
 @Controller
 @RequiredArgsConstructor

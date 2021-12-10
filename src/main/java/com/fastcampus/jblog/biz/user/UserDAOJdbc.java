@@ -5,8 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.springframework.stereotype.Repository;
-
 import com.fastcampus.jblog.common.JDBCUtil;
 
 public class UserDAOJdbc implements UserDAO {

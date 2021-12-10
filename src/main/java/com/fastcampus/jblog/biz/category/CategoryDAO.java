@@ -1,7 +1,6 @@
 package com.fastcampus.jblog.biz.category;
 
 import com.fastcampus.jblog.biz.blog.BlogVO;
-import com.fastcampus.jblog.biz.user.UserVO;
 
 import java.util.List;
 

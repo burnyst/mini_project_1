@@ -2,20 +2,12 @@ package com.fastcampus.jblog.config;
 
 import com.fastcampus.jblog.biz.blog.BlogDAO;
 import com.fastcampus.jblog.biz.blog.BlogDAOJdbc;
-import com.fastcampus.jblog.biz.blog.BlogDAOJpa;
-import com.fastcampus.jblog.biz.blog.BlogDAOMybatis;
 import com.fastcampus.jblog.biz.category.CategoryDAO;
 import com.fastcampus.jblog.biz.category.CategoryDAOJdbc;
-import com.fastcampus.jblog.biz.category.CategoryDAOJpa;
-import com.fastcampus.jblog.biz.category.CategoryDAOMybatis;
 import com.fastcampus.jblog.biz.post.PostDAO;
 import com.fastcampus.jblog.biz.post.PostDAOJdbc;
-import com.fastcampus.jblog.biz.post.PostDAOJpa;
-import com.fastcampus.jblog.biz.post.PostDAOMybatis;
 import com.fastcampus.jblog.biz.user.UserDAO;
 import com.fastcampus.jblog.biz.user.UserDAOJdbc;
-import com.fastcampus.jblog.biz.user.UserDAOJpa;
-import com.fastcampus.jblog.biz.user.UserDAOMybatis;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
