@@ -5,7 +5,6 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +18,7 @@ import com.fastcampus.jblog.biz.user.UserVO;
 @RequiredArgsConstructor
 public class UserController {
 
-	private final UserService userSerivce;
+	private final UserService userService;
 	private final BlogService blogService;
 	
 	@RequestMapping("/login/view")
@@ -29,7 +28,7 @@ public class UserController {
 	
 	@RequestMapping("/login")
 	public String login(UserVO user, HttpSession session, Model model) {
-		UserVO findUser = userSerivce.getUser(user);
+		UserVO findUser = userService.getUser(user);
 		if(!UserVO.isEmpty(findUser)) {
 			// 로그인 성공한 경우 세션에 사용자 정보를 저장한다.
 			session.setAttribute("user", findUser);
